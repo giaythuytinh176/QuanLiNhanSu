@@ -39,11 +39,6 @@ class Employee
         return $this->lname;
     }
 
-    public function getPosition()
-    {
-        return $this->position;
-    }
-
     public function setAddress($address)
     {
         $this->address = $address;
@@ -64,6 +59,17 @@ class Employee
         $this->lname = $lname;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getPosition()
+    {
+        return $this->position;
+    }
+
+    /**
+     * @param mixed $position
+     */
     public function setPosition($position)
     {
         $this->position = $position;
