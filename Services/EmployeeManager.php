@@ -1,8 +1,6 @@
 <?php
 
-namespace Services;
-
-use Models\Employee;
+namespace Selling\Services;
 
 class EmployeeManager
 {
@@ -39,44 +37,36 @@ class EmployeeManager
     public function delete($id)
     {
         foreach (self::$employee as $key => $value) {
-            //print("<pre>" . print_r($value, true) . "</pre>");
             if ($key == $id) {
-                //unset(self::$employee[$key]);
-                //self::$employee = array_values(self::$employee);
                 array_splice(self::$employee, $key, 1);
             }
         }
-        //$toArr = json_decode(json_encode(self::$employee), true);
-        //$toArr = parent::objtoArr(self::$employee);
         $toArr = self::objtoArr();
         self::saveJson("data.json", $toArr, 1);
-        //print("<pre>" . print_r($toArr, true) . "</pre>");
     }
 
     public function addEmployee()
     {
         $toArr = self::objtoArr();
-        //print("<pre>" . print_r($toArr, true) . "</pre>");die;
-        include_once "add.php";
+        include_once "View/add.php";
     }
 
     public function edit($id)
     {
         $toArr = self::objtoArr();
-        //print("<pre>" . print_r($toArr, true) . "</pre>");die;
-        include_once "edit.php";
+        include_once "View/edit.php";
     }
 
     public function loadJson($filename = "data.json")
     {
-        $data = json_decode(file_get_contents($filename), true);
+        $data = json_decode(file_get_contents("Data/$filename"), true);
         if (empty($data)) $data = [];
         return $data;
     }
 
     public function saveJson($filename = "data.json", $data, $saveAndReplace = 0)
     {
-        $load = json_decode(file_get_contents($filename), true);
+        $load = json_decode(file_get_contents("Data/$filename"), true);
         if ($saveAndReplace == 1) {
             $load = $data;
         } else {
@@ -85,6 +75,6 @@ class EmployeeManager
                 array_push($load, $value);
             }
         }
-        file_put_contents($filename, json_encode($load));
+        file_put_contents("Data/$filename", json_encode($load));
     }
 }

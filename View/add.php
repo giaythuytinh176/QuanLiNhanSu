@@ -5,7 +5,7 @@ if ($_SERVER['REQUEST_METHOD'] == "POST") {
         unset($_POST['btn']);
         if (!empty($toArr)) {
             foreach ($toArr as $value) {
-                $toArr[count($toArr) + 1] = $_POST;
+                array_push($toArr, $_POST);
             }
         } else {
             $toArr[] = $_POST;
